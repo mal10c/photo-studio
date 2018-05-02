@@ -1,7 +1,2 @@
 flask
 redis
-numpy
-dlib
-face_recognition
-imutils
-scipy
