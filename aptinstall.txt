@@ -1,0 +1,16 @@
+python2.7
+python-pip
+python-dev
+build-essential 
+omniorb
+omniorb-idl
+omniorb-nameserver
+omnievents
+python-omniorb
+omniidl-python
+virtualenv
+libopencv-dev
+python-opencv
+cmake
+libopenblas-dev
+liblapack-dev
