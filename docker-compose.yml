@@ -6,7 +6,15 @@ services:
      - "5000:5000"
     volumes:
      - .:/code
+  
   camera-controller:
     build: './Camera-Controller'
+    tty: true
+    command: /bin/bash
+    privileged: true
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - /run/udev:/run/udev:ro
+
   redis:
     image: "redis:alpine"

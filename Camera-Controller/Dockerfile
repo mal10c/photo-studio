@@ -1,5 +1,4 @@
-FROM python:2.7-alpine
+FROM sellpy/python3-gphoto2
+USER root
 ADD . /code
 WORKDIR /code
-RUN pip install -r requirements.txt
-CMD ["python", "app.py"]
