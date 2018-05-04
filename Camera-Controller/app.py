@@ -1,1 +1,1 @@
-print "Hello from PYTHON 2.7!"
+print("Hello from PYTHON 2.7!")
