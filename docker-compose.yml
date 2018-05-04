@@ -9,6 +9,9 @@ services:
   
   camera-controller:
     build: './Camera-Controller'
-
+    privileged: true
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - /run/udev:/run/udev:ro
   redis:
     image: "redis:alpine"
