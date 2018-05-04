@@ -1,3 +1,7 @@
 # Photo Studio
 
-Takes a picture and does other stuff... I'll update this later.
+To launch, install Docker and run the following command:
+
+	docker-compose up
+
+If you need to remove any and all containers that were created, run clean.sh.
