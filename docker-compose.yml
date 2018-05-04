@@ -13,5 +13,7 @@ services:
     volumes:
       - /dev/bus/usb:/dev/bus/usb
       - /run/udev:/run/udev:ro
+  photo-mod:
+    build: './Photo-Mod'
   redis:
     image: "redis:alpine"
