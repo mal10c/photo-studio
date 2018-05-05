@@ -16,6 +16,7 @@ If you need to remove any and all containers that were created, run clean.sh.
  * Add first/last name field
  * Set number of pictures to take field
  * Show photos when done
+ * Create button that will take a picture on camera **[ DONE ]**
 
 ## Countdown-Website
 
@@ -40,4 +41,4 @@ If you need to remove any and all containers that were created, run clean.sh.
 
 ## All Categories
 
- * Find a way to send requests/results between containers
+ * Find a way to send requests/results between containers **[ DONE ]**
