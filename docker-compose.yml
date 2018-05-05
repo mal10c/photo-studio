@@ -21,10 +21,15 @@ services:
     hostname: 'cam'
     networks:
       - studio
+
   photo-mod:
     build: './Photo-Mod'
+    ports:
+      - 5003:5000
+    hostname: 'mod'
     networks:
       - studio
+
   redis:
     image: "redis:alpine"
     networks:
