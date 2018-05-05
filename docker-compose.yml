@@ -3,17 +3,33 @@ services:
   website:
     build: './Website'
     ports:
-     - "5000:5000"
+     - "5001:5000"
     volumes:
      - .:/code
+    hostname: 'web'
+    networks:
+      - studio
   
   camera-controller:
     build: './Camera-Controller'
+    ports:
+     - "5002:5000"
     privileged: true
     volumes:
       - /dev/bus/usb:/dev/bus/usb
       - /run/udev:/run/udev:ro
+    hostname: 'cam'
+    networks:
+      - studio
   photo-mod:
     build: './Photo-Mod'
+    networks:
+      - studio
   redis:
     image: "redis:alpine"
+    networks:
+      - studio
+
+networks:
+  studio:
+    driver: bridge

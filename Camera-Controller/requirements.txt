@@ -1,2 +1,3 @@
+gphoto2
 flask
 redis

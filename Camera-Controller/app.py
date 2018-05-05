@@ -1,6 +1,11 @@
 import logging
 import os
 import gphoto2 as gp
+import redis
+from flask import Flask
+
+app = Flask(__name__)
+cache = redis.Redis(host='redis', port=6379)
 
 def take_photo():
 
@@ -33,4 +38,10 @@ def take_photo():
 
     return photoFile
 
-take_photo()
+@app.route('/')
+def hello():
+    take_photo()
+    return '<b>Hello from the camera controller!'
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
