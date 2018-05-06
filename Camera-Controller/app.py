@@ -2,6 +2,7 @@ import logging
 import os
 import gphoto2 as gp
 from flask import Flask
+from shutil import copyfile
 
 app = Flask(__name__)
 
@@ -10,7 +11,6 @@ def take_photo():
     log = ""
 
     # Get the directory containing this script
-    #photoDir = os.path.dirname(os.path.realpath(__file__))
     photoDir = "/tmp"
 
     # Create capture directory
@@ -35,6 +35,15 @@ def take_photo():
             camera, file_path.folder, file_path.name, gp.GP_FILE_TYPE_NORMAL))
     gp.check_result(gp.gp_file_save(camera_file, photoFile))
     gp.check_result(gp.gp_camera_exit(camera))
+
+    newPath = os.path.dirname(os.path.realpath(__file__))
+    newPath = os.path.join(newPath, "photos")
+
+    if not os.path.exists(newPath):
+        log += "Creating final photo directory" + "\n"
+        os.makedirs(newPath)
+
+    copyfile(photoFile, newPath)
 
     return photoFile, photoDir, log
 
