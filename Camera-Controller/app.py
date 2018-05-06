@@ -10,7 +10,8 @@ def take_photo():
     log = ""
 
     # Get the directory containing this script
-    photoDir = os.path.dirname(os.path.realpath(__file__))
+    #photoDir = os.path.dirname(os.path.realpath(__file__))
+    photoDir = "/tmp"
 
     # Create capture directory
     photoDirName = "photos"
@@ -29,11 +30,10 @@ def take_photo():
         camera, gp.GP_CAPTURE_IMAGE))
     log += 'Camera file path: {0}/{1}'.format(file_path.folder, file_path.name) + "\n"
     photoFile = os.path.join(photoDir, file_path.name)
-    log += 'Copying image to', photoFile + "\n"
+    log += 'Copying image to' + photoFile + "\n"
     camera_file = gp.check_result(gp.gp_camera_file_get(
             camera, file_path.folder, file_path.name, gp.GP_FILE_TYPE_NORMAL))
     gp.check_result(gp.gp_file_save(camera_file, photoFile))
-    #subprocess.call(['xdg-open', photoFile])
     gp.check_result(gp.gp_camera_exit(camera))
 
     return photoFile, photoDir, log
