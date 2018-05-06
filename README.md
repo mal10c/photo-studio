@@ -28,6 +28,8 @@ If you need to remove any and all containers that were created, run clean.sh.
  * Place photo in directory with email address
  * Add int to photo name so they're not replaced
  * Determine if camera is present
+ * Copy photo to mounted volume **[ DONE ]**
+ * Copy photo right to dest, no /tmp dir
 
 ## Photo-Mod
 
