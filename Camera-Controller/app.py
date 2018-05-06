@@ -36,15 +36,7 @@ def take_photo():
     gp.check_result(gp.gp_file_save(camera_file, photoFile))
     gp.check_result(gp.gp_camera_exit(camera))
 
-    newPath = os.path.dirname(os.path.realpath(__file__))
-    newPath = os.path.join(newPath, "photos")
-
-    log += "Copying to: " + newPath + "\n"
-
-    if not os.path.exists(newPath):
-        log += "Creating final photo directory" + "\n"
-        os.makedirs(newPath)
-
+    newPath = "/photos"
     newPath = os.path.join(newPath, file_path.name)
 
     copyfile(photoFile, newPath)
