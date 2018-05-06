@@ -34,12 +34,12 @@ def take_photo():
     #subprocess.call(['xdg-open', photoFile])
     gp.check_result(gp.gp_camera_exit(camera))
 
-    return photoFile
+    return photoFile, photoDir
 
 @app.route('/')
 def hello():
-    take_photo()
-    return '<b>Hello from the camera controller!'
+    photoFile, photoDir = take_photo()
+    return '<b>Hello from the camera controller!\n{}'.format(photoDir)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
