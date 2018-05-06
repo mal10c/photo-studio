@@ -44,3 +44,4 @@ If you need to remove any and all containers that were created, run clean.sh.
 ## All Categories
 
  * Find a way to send requests/results between containers **[ DONE ]**
+ * Get project to work with docker-compose on a raspberry pi **[ DONE ]**
