@@ -39,9 +39,13 @@ def take_photo():
     newPath = os.path.dirname(os.path.realpath(__file__))
     newPath = os.path.join(newPath, "photos")
 
+    log += "Copying to: " + newPath + "\n"
+
     if not os.path.exists(newPath):
         log += "Creating final photo directory" + "\n"
         os.makedirs(newPath)
+
+    newPath = os.path.join(newPath, file_path.name)
 
     copyfile(photoFile, newPath)
 
