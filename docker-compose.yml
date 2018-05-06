@@ -9,6 +9,9 @@ services:
     hostname: 'web'
     networks:
       - studio
+    depends_on:
+      - camera-controller
+      - photo-mod
   
   camera-controller:
     build: './Camera-Controller'
@@ -27,11 +30,6 @@ services:
     ports:
       - 5003:5000
     hostname: 'mod'
-    networks:
-      - studio
-
-  redis:
-    image: "redis:alpine"
     networks:
       - studio
 

@@ -100,3 +100,4 @@ ENV/
 # mypy
 .mypy_cache/
 Camera-Controller/photos/capt0000.jpg
+my-logfile.txt
