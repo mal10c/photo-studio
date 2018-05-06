@@ -21,6 +21,7 @@ services:
     volumes:
       - /dev/bus/usb:/dev/bus/usb
       - /run/udev:/run/udev:ro
+      - ./photos:/photos
     hostname: 'cam'
     networks:
       - studio
