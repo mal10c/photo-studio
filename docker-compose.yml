@@ -5,18 +5,28 @@ services:
     ports:
      - "5001:5000"
     volumes:
-     - .:/code
+     - .:/share
     hostname: 'web'
     networks:
       - studio
     depends_on:
       - camera-controller
       - photo-mod
-  
+  countdown-website:
+    build: './Countdown-Website'
+    ports:
+      - "5004:5000"
+    hostname: 'countdown'
+    networks:
+      - studio
+    depends_on:
+      - website
   camera-controller:
     build: './Camera-Controller'
     ports:
      - "5002:5000"
+    volumes:
+     - .:/share
     privileged: true
     volumes:
       - /dev/bus/usb:/dev/bus/usb
@@ -28,6 +38,8 @@ services:
 
   photo-mod:
     build: './Photo-Mod'
+    volumes:
+     - .:/share
     ports:
       - 5003:5000
     hostname: 'mod'
