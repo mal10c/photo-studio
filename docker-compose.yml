@@ -12,7 +12,7 @@ services:
     ports:
      - "5001:5000"
     volumes:
-     - .:/share
+     - ./Website:/share
     hostname: 'web'
     networks:
       - studio
