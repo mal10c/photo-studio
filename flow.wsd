@@ -1,4 +1,4 @@
-@startuml
+@startuml Flow
 
 actor "Daddy" as admin
 actor "Jacob" as jacob
