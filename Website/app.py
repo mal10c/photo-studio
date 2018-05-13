@@ -21,19 +21,19 @@ def hello():
     #   * Create stand alone html pages that are loaded by this function
     #
     #   * website:
-    #       - sends countdown time, number of photos, email, first/last name to countdown-service
-    #       - also works with the countdown-service to display a smaller countdown
+    #       - [X] sends countdown time, number of photos, email, first/last name to countdown-service
+    #       - [X] also works with the countdown-service to display a smaller countdown
     #       - works with photo-album to retrieve list of photos, then shows them
     #       - user selects best photos
     #       - sends best photos to email-service
     #   * countdown-service
     #       - countdown-website page(s) will pull from this for the countdown time
-    #       - this will send a request to camera-controller to take the photo
-    #       - event if countdown timer is zero, still goes through this service
-    #       - knows how many pictures should be taken (and does the countdown for each one)
+    #       - [X] this will send a request to camera-controller to take the photo
+    #       - [X] event if countdown timer is zero, still goes through this service
+    #       - [X] knows how many pictures should be taken (and does the countdown for each one)
     #       - sends unique id to camera-controller so photos can be organized, and we know what's what
     #   * camera-controller:
-    #       - saves the photos in /share
+    #       - [X] saves the photos in /share
     #       - sends request to photo-mod to insert logo
     #   * photo-mod:
     #       - places logo in corner

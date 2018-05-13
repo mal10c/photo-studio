@@ -1,0 +1,30 @@
+@startuml
+
+actor "Daddy" as admin
+actor "Jacob" as jacob
+participant "Admin-Website" as admin.website
+participant "Website" as website
+participant "Countdown-Service" as countdown.service
+participant "Camera-Controller" as camera.controller
+participant "Photo-Mod" as photo.mod
+participant "Photo-Album" as photo.album
+participant "Email-Service" as email.service
+
+admin --> admin.website : Enter number of photos to take
+admin --> admin.website : Enter countdown time
+jacob --> website : Enters first, last name
+jacob --> website : Enters email address
+admin --> admin.website : Clicks start
+admin.website --> countdown.service : Sends admin and user info
+loop
+    loop
+        countdown.service --> countdown.service : Decrement counter
+        countdown.service --> countdown.service : Update public API
+    end
+    countdown.service --> camera.controller : Request photo to be taken
+    camera.controller --> camera.controller : "Save photo in /share"
+    countdown.service --> countdown.service : Delay
+end
+
+
+@enduml
