@@ -22,6 +22,7 @@ def hello():
     #
     #   * website:
     #       - sends countdown time, number of photos, email, first/last name to countdown-service
+    #       - also works with the countdown-service to display a smaller countdown
     #       - works with photo-album to retrieve list of photos, then shows them
     #       - user selects best photos
     #       - sends best photos to email-service
