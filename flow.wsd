@@ -1,30 +1,67 @@
 @startuml Flow
 
-actor "Daddy" as admin
-actor "Jacob" as jacob
-participant "Admin-Website" as admin.website
-participant "Website" as website
+box "Admin Area" #ffeeee
+    actor "Admin" as admin
+    participant "Admin-Website" as admin.website
+end box
+box "User Area" #eeeeff
+    actor "Family" as jacob
+    participant "Website" as website
+end box
 participant "Countdown-Service" as countdown.service
 participant "Camera-Controller" as camera.controller
 participant "Photo-Mod" as photo.mod
 participant "Photo-Album" as photo.album
 participant "Email-Service" as email.service
 
+== Universal setup ==
 admin --> admin.website : Enter number of photos to take
 admin --> admin.website : Enter countdown time
+admin --> admin.website : Saves information
+admin.website --> countdown.service : Updates number of photos to take, and countdown time
+
+== Customer information ==
 jacob --> website : Enters first, last name
 jacob --> website : Enters email address
-admin --> admin.website : Clicks start
-admin.website --> countdown.service : Sends admin and user info
+website --> website : Generates unique token
+website --> countdown.service : Unique token
+countdown.service --> countdown.service : Unique token becomes active
+
+== Wait until ready ==
+loop
+    admin.website --> countdown.service : Requests unqiue token and user info
+end
+admin.website <-- countdown.service : Unique token and user info
+admin.website --> admin.website : Update page to show "ready"
+
+admin --> admin.website : Clicks "Take Photos"
+admin.website --> countdown.service : Sends unique token and user info
 loop
     loop
         countdown.service --> countdown.service : Decrement counter
-        countdown.service --> countdown.service : Update public API
+        countdown.service --> countdown.service : Update public API so other services know of counter value
     end
-    countdown.service --> camera.controller : Request photo to be taken
+    countdown.service --> camera.controller : Request photo to be taken\nand pass unique token
+    camera.controller --> camera.controller : Take photo
     camera.controller --> camera.controller : "Save photo in /share"
+    camera.controller --> photo.mod : Sends image name
+    photo.mod --> photo.mod : Inserts logo
+    camera.controller <-- photo.mod : Sends photo name
+    countdown.service <-- camera.controller : Sends photo name
+    countdown.service --> photo.album : Sends photo name and unique token
+    photo.album --> photo.album : Moves photo to correct location
     countdown.service --> countdown.service : Delay
 end
 
+loop
+    website --> photo.album : Request "is complete" by passing token
+end
+website --> website : Show photos
+jacob --> website : Select photos to keep
+
+website --> email.service : List of photos and list of email addresses
+email.service --> email.service : Create email from template file
+email.service --> email.service : Include attachments
+email.service --> email.service : Send email to addresses
 
 @enduml

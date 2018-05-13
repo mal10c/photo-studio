@@ -34,10 +34,9 @@ def hello():
     #       - sends unique id to camera-controller so photos can be organized, and we know what's what
     #   * camera-controller:
     #       - [X] saves the photos in /share
-    #       - sends request to photo-mod to insert logo
+    #       - [X] sends request to photo-mod to insert logo
     #   * photo-mod:
-    #       - places logo in corner
-    #       - if there's time, determines if eyes are open
+    #       - [X] places logo in corner
     #   * photo-album:
     #       - rename photos to this
     #       - returns list of photos that match a key
