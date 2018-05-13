@@ -20,7 +20,8 @@ If you need to remove any and all containers that were created, run clean.sh.
 
 ## Countdown-Website
 
- * Consider creating a countdown timer
+ * Create a countdown website skeleton **[ DONE ]**
+ * Create a countdown timer
 
 ## Camera-Controller
 
