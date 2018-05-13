@@ -1,5 +1,12 @@
 version: '3'
 services:
+  admin-website:
+    build: './Admin-Website'
+    ports:
+      - "5000:5000"
+    volumes:
+     - ./Admin-Website:/share
+  
   website:
     build: './Website'
     ports:
@@ -12,6 +19,7 @@ services:
     depends_on:
       - camera-controller
       - photo-mod
+  
   countdown-website:
     build: './Countdown-Website'
     ports:
@@ -21,6 +29,7 @@ services:
       - studio
     depends_on:
       - website
+  
   camera-controller:
     build: './Camera-Controller'
     ports:
