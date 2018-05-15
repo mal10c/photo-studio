@@ -2,10 +2,13 @@
 <html>
     <head>
         <title>Photo-Studio: Admin Portal</title>
+        <script src="admin.js"></script>
     </head>
     <body>
         <h1>Photo Studio</h1>
         <h2>Admin Portal</h2>
+
+        <iframe id="control"></iframe>
 
         <div>
             <p>Universal Settings</p>
@@ -27,7 +30,8 @@
         <div>
             <p>Session Settings</p>
             <div id="countStatus"></div>
-            <button type="button" id="cmd_restartSession">Start New Session</button>
+            <button type="button" id="cmd_startSession">Start New Session</button>
+            <button type="button" id="cmd_endSession">End Session</button>
         </div>
 
     </body>

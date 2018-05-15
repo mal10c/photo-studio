@@ -2,23 +2,31 @@
 <html>
     <head>
         <title>Photo-Studio: Photo Session</title>
+
+        <script src="website.js"></script>
     </head>
     <body>
+        <iframe id="sessionState"></iframe>
         <h1>Photo Studio</h1>
         <h2>Photo Session</h2>
 
-        <div id="token"></div>
-        
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName"/>
-        
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName"/>
+        <div id="inactive">
 
-        <label for="email">E-mail Addresses:</label>
-        <textarea rows="4" cols="50" id="email"></textarea>
+            <div id="token"></div>
+            
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName"/>
+            
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName"/>
 
-        <button type="button" id="cmd_startSession">Start Photo Session</button>
+            <label for="email">E-mail Addresses:</label>
+            <textarea rows="4" cols="50" id="email"></textarea>
+
+            <button type="button" id="cmd_startSession">Start Photo Session</button>
+        </div>
+
+        <div id="active">Session is active!</div>
 
     </body>
 </html>
