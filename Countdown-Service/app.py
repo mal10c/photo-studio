@@ -12,8 +12,8 @@ def hello():
     html = """
         <script language="javascript">
             respondToMessage = function(e) {
-                if((e.origin == 'http://132.250.60.1:5000') ||
-                   (e.origin == 'http://132.250.60.1:5001')) {
+                if((e.origin == 'http://172.16.0.1:5000') ||
+                   (e.origin == 'http://172.16.0.1:5001')) {
                     if(e.data == 'sessionState')
                     {
                         e.source.postMessage('""" + sessionState + """', e.origin);

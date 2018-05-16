@@ -4,10 +4,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     control.style.display = "none";
     iframe = document.getElementById("sessionState")
     iframe.style.display = "none";
-    var url = "http://132.250.60.1:5010"
+    var url = "http://172.16.0.1:5010"
     var cmd_endSession = document.getElementById("cmd_endSession");
     cmd_endSession.addEventListener("click", function() {
-        control.src = "http://132.250.60.1:5010/session?state=inactive";
+        control.src = "http://172.16.0.1:5010/session?state=inactive";
     });
 
     handleResponse = function(e) { 

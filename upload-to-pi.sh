@@ -1,6 +1,6 @@
 #!/bin/bash
 
-piAddr="132.250.60.1"
+piAddr="172.16.0.1"
 
 # Get the directory containing the script
 workingDir=$(dirname $(readlink -f $0))

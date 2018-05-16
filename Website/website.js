@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     activeStuff = document.getElementById("active");
     inactiveStuff = document.getElementById("inactive");
-    var url = "http://132.250.60.1:5010"
+    var url = "http://172.16.0.1:5010"
     iframe = document.getElementById("sessionState")
     iframe.style.display = "none";
     control = document.getElementById("control");
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     iframe.src = url;
 
     cmd_startSession.addEventListener("click", function() {
-        control.src = "http://132.250.60.1:5010/session?state=active";
+        control.src = "http://172.16.0.1:5010/session?state=active";
     });
 
 });
