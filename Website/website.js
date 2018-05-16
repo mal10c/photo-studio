@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var url = "http://132.250.60.1:5010"
     iframe = document.getElementById("sessionState")
     iframe.style.display = "none";
+    control = document.getElementById("control");
+    control.style.display = "none";
 
     handleResponse = function(e) { 
         if(e.origin == url) 
@@ -22,13 +24,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
         } 
     } 
     window.addEventListener('message', handleResponse, false);
+    
+    // Callback when iframe contents are loaded
+    iframeLoaded = function() {
+        console.log("Posting request");
+        iframe.contentWindow.postMessage('sessionState', url);
+        removeEventListener("load", iframeLoaded, true);
+        iframe.src = url;
+    };
+
+    // Register iframe load callback
+    iframe.addEventListener("load", iframeLoaded, false);
     iframe.src = url;
 
-    setInterval(function() {
-
-        iframe.src = url;
-        iframe.contentWindow.postMessage('sessionState', url);
-
-    }, 100);
+    cmd_startSession.addEventListener("click", function() {
+        control.src = "http://132.250.60.1:5010/session?state=active";
+    });
 
 });
