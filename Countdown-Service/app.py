@@ -24,7 +24,7 @@ def hello():
         </script>
     """
 
-    return html + "woo"
+    return html
 
 @app.route('/<path:path>')
 def catch_all(path):

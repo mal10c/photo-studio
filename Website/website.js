@@ -7,21 +7,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
     iframe.style.display = "none";
     control = document.getElementById("control");
     control.style.display = "none";
+    data = "";
 
-    handleResponse = function(e) { 
+    handleResponse = function(e) {
         if(e.origin == url) 
         { 
-            if (e.data == "active")
+            if (data != e.data)
             {
-                activeStuff.style.display = "block";
-                inactiveStuff.style.display = "none";
+                data = e.data;
+                if (e.data == "active")
+                {
+                    activeStuff.style.display = "block";
+                    inactiveStuff.style.display = "none";
+                }
+                else
+                {
+                    activeStuff.style.display = "none";
+                    inactiveStuff.style.display = "block";
+                }
             }
-            else
-            {
-                activeStuff.style.display = "none";
-                inactiveStuff.style.display = "block";
-            }
-        } 
+        }
+
+        setTimeout(function() {
+            iframe.src = url;
+        }, 500);
     } 
     window.addEventListener('message', handleResponse, false);
     
@@ -29,8 +38,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     iframeLoaded = function() {
         console.log("Posting request");
         iframe.contentWindow.postMessage('sessionState', url);
-        removeEventListener("load", iframeLoaded, true);
-        iframe.src = url;
     };
 
     // Register iframe load callback
