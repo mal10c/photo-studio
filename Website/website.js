@@ -7,15 +7,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     iframe.style.display = "none";
     control = document.getElementById("control");
     control.style.display = "none";
+    firstName = document.getElementById("firstName");
+    lastName = document.getElementById("lastName");
     data = "";
+    token = "";
 
     handleResponse = function(e) {
         if(e.origin == url) 
         { 
             if (data != e.data)
             {
-                data = e.data;
-                if (e.data == "active")
+                data = e.data.split("|");
+                if (data[0] == "active")
                 {
                     activeStuff.style.display = "block";
                     inactiveStuff.style.display = "none";
@@ -45,7 +48,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     iframe.src = url;
 
     cmd_startSession.addEventListener("click", function() {
-        control.src = "http://172.16.0.1:5010/session?state=active";
+        token = firstName.value + ":" + lastName.value + ":"
+        token += Math.floor(Math.random() * 20);
+        control.src = "http://172.16.0.1:5010/session?state=active&token=" + token;
     });
 
 });

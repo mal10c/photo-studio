@@ -13,6 +13,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var cmd_endSession = document.getElementById("cmd_endSession");
     var cmd_takePhoto = document.getElementById("cmd_takePhoto");
 
+    // Lists
+    var photosToTakeCt = document.getElementById("photosToTakeCt");
+    var countdownTime = document.getElementById("countdownTime");
+
+    photosToTakeCt.addEventListener("change", function() {
+        photoCt = photosToTakeCt.value;
+        ctDownTime = countdownTime.value;
+        console.log("Writing: " + photoCt + ", " + ctDownTime);
+        console.log("http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime);
+        control.src = "http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime;
+    });
+
+    countdownTime.addEventListener("change", function() {
+        photoCt = photosToTakeCt.value;
+        ctDownTime = countdownTime.value;
+        console.log("Writing: " + photoCt + ", " + ctDownTime);
+        console.log("http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime);
+        control.src = "http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime;
+    });
+
     // Button click events
     cmd_endSession.addEventListener("click", function() {
         control.src = "http://172.16.0.1:5010/session?state=inactive";
@@ -24,15 +44,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Callback when iframe contents are loaded
     iframeLoaded = function() {
-        console.log("Posting request");
         iframe.contentWindow.postMessage('sessionState', url);
     };
 
     handleResponse = function(e) { 
         if(e.origin == url) 
-        { 
-            if (e.data == "active")
+        {
+            params = e.data.split("|");
+            if (params[0] == "active")
             {
+                console.log("Token: " + params[1]);
                 sessionControls.style.display = "block";
             }
             else
