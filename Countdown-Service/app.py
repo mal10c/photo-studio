@@ -1,4 +1,5 @@
 import time
+from time import sleep
 import os
 from flask import Flask, request, redirect
 
@@ -7,13 +8,15 @@ sessionState = "inactive"
 photoCtToTake = 0
 countdownTime = 0
 token = ""
+photoCountdown = "No"
+ctTimeLeft = 0
 
 @app.route('/')
 def hello():
 
     global sessionState
     global token
-    params = sessionState + "|" + token
+    params = sessionState + "|" + token + "|" + photoCountdown + "|" + str(ctTimeLeft)
     html = """
         <script language="javascript">
             respondToMessage = function(e) {
@@ -39,7 +42,7 @@ def catch_all(path):
         global sessionState
         state = request.args.get("state")
         t = request.args.get("token")
-        if state == "":
+        if state == None:
             return sessionState
         elif state == "active":
             sessionState = "active"
@@ -76,7 +79,28 @@ def catch_all(path):
 
     # Request a photo be taken
     elif path == "takePhoto":
-        pass
+        
+        global token
+        global photoCtToTake
+        global countdownTime
+        global sessionState
+        global photoCountdown
+        global ctTimeLeft
+
+        countdownTime = int(countdownTime)
+        ctTimeLeft = countdownTime
+
+        result = ""
+
+        photoCountdown = "Yes"
+        for ctOffset in range(0, countdownTime + 1):
+            ctTimeLeft = countdownTime - ctOffset
+            result += "Now: " + str(ctTimeLeft) + ", "
+            print("Countdown: " + str(ctTimeLeft))
+            sleep(1)
+
+        return result
+
     else:
         return "unknown"
 

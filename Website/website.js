@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     control.style.display = "none";
     firstName = document.getElementById("firstName");
     lastName = document.getElementById("lastName");
+    countStatus = document.getElementById("countStatus");
     data = "";
     token = "";
 
@@ -20,6 +21,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 data = e.data.split("|");
                 if (data[0] == "active")
                 {
+                    if (data[2] == "Yes")
+                    {
+                        countStatus.innerHTML = data[3];
+                    }
                     activeStuff.style.display = "block";
                     inactiveStuff.style.display = "none";
                 }

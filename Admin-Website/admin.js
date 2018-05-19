@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Div tags
     var sessionControls = document.getElementById("sessionControls");
+    var countStatus = document.getElementById("countStatus");
 
     // Buttons
     var cmd_endSession = document.getElementById("cmd_endSession");
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
     cmd_takePhoto.addEventListener("click", function() {
-        alert("Take photo!");
+        control.src = "http://172.16.0.1:5010/takePhoto";
     });
 
     // Callback when iframe contents are loaded
@@ -50,10 +51,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
     handleResponse = function(e) { 
         if(e.origin == url) 
         {
+            // Params:
+            //  0: state
+            //  1: token
+            //  2: photo countdown (Yes|No)
+            //  3: time left
             params = e.data.split("|");
             if (params[0] == "active")
             {
                 console.log("Token: " + params[1]);
+                if (params[2] == "Yes")
+                {
+                    countStatus.innerHTML = params[3];
+                }
+                
                 sessionControls.style.display = "block";
             }
             else
@@ -64,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         setTimeout(function() {
             iframe.src = url;
-        }, 500);
+        }, 200);
     } 
     window.addEventListener('message', handleResponse, false);
 
