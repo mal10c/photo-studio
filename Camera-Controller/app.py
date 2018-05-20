@@ -7,7 +7,7 @@ import logging
 
 app = Flask(__name__)
 
-def take_photo(token):
+def take_photo(token, ct):
 
     log = ""
 
@@ -38,7 +38,7 @@ def take_photo(token):
     gp.check_result(gp.gp_camera_exit(camera))
 
     newPath = "/photos"
-    fileName = token + "__" + file_path.name
+    fileName = token + "__" + str(ct) + "_" + file_path.name
     newDir = os.path.join(newPath, token)
     if not os.path.exists(newDir):
         logging.info("Creating directory for photos at: " + newDir)
@@ -57,8 +57,9 @@ def take_photo(token):
 def catch_all(path):
     if path == "takePhoto":
         token = request.args.get("token")
+        ct = request.args.get("ct")
         logging.info("TAKING PICTURE!")
-        newPath = take_photo(token)
+        newPath = take_photo(token, ct)
         return '{}'.format(newPath)
     
     return "No token given"

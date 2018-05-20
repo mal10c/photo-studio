@@ -8,7 +8,7 @@ import urllib2
 app = Flask(__name__)
 
 sessionState = "inactive"
-photoCtToTake = 0
+photoCtToTake = 1
 countdownTime = 0
 token = ""
 photoCountdown = "No"
@@ -96,14 +96,15 @@ def catch_all(path):
         result = ""
 
         photoCountdown = "Yes"
-        for ctOffset in range(0, countdownTime + 1):
-            ctTimeLeft = countdownTime - ctOffset
-            result += "Now: " + str(ctTimeLeft) + ", "
-            logging.info("Countdown: " + str(ctTimeLeft))
-            sleep(1)
+        for ct in range(0, int(photoCtToTake)):
+            for ctOffset in range(0, countdownTime + 1):
+                ctTimeLeft = countdownTime - ctOffset
+                result += "Now: " + str(ctTimeLeft) + ", "
+                logging.info("Countdown: " + str(ctTimeLeft))
+                sleep(1)
 
-        logging.info("Taking picture...")
-        contents = urllib2.urlopen("http://172.16.0.1:5002/takePhoto?token=" + token).read()
+            logging.info("Taking picture...")
+            contents = urllib2.urlopen("http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct)).read()
 
         return result
 
