@@ -1,0 +1,1 @@
+Place a logo in this directory.
