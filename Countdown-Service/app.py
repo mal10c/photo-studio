@@ -2,8 +2,11 @@ import time
 from time import sleep
 import os
 from flask import Flask, request, redirect
+import logging
+import urllib2
 
 app = Flask(__name__)
+
 sessionState = "inactive"
 photoCtToTake = 0
 countdownTime = 0
@@ -96,8 +99,11 @@ def catch_all(path):
         for ctOffset in range(0, countdownTime + 1):
             ctTimeLeft = countdownTime - ctOffset
             result += "Now: " + str(ctTimeLeft) + ", "
-            print("Countdown: " + str(ctTimeLeft))
+            logging.info("Countdown: " + str(ctTimeLeft))
             sleep(1)
+
+        logging.info("Taking picture...")
+        contents = urllib2.urlopen("http://172.16.0.1:5002").read()
 
         return result
 
@@ -105,5 +111,6 @@ def catch_all(path):
         return "unknown"
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     app.run(host="0.0.0.0", debug=True)
 

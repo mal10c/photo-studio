@@ -3,6 +3,7 @@ import os
 import gphoto2 as gp
 from flask import Flask
 from shutil import copyfile
+import logging
 
 app = Flask(__name__)
 
@@ -45,8 +46,10 @@ def take_photo():
 
 @app.route('/')
 def hello():
+    logging.info("TAKING PICTURE!")
     photoFile, photoDir, log = take_photo()
     return '<b>Hello from the camera controller!\n{}\n\n{}'.format(photoDir, log)
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     app.run(host="0.0.0.0", debug=True)
