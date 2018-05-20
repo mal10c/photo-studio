@@ -18,7 +18,6 @@ services:
       - studio
     depends_on:
       - camera-controller
-      - photo-mod
       - countdown-service
   
   countdown-service:
@@ -27,16 +26,6 @@ services:
       - "5010:5000"
     networks:
       - studio
-
-  countdown-website:
-    build: './Countdown-Website'
-    ports:
-      - "5004:5000"
-    hostname: 'countdown'
-    networks:
-      - studio
-    depends_on:
-      - website
   
   camera-controller:
     build: './Camera-Controller'
@@ -49,16 +38,6 @@ services:
       - ./photos:/photos
       - .:/share
     hostname: 'cam'
-    networks:
-      - studio
-
-  photo-mod:
-    build: './Photo-Mod'
-    volumes:
-     - .:/share
-    ports:
-      - 5003:5000
-    hostname: 'mod'
     networks:
       - studio
 

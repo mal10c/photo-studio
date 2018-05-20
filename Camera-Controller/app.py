@@ -4,6 +4,7 @@ import gphoto2 as gp
 from flask import Flask, request, redirect
 from shutil import copyfile
 import logging
+from PIL import Image
 
 app = Flask(__name__)
 
@@ -52,6 +53,25 @@ def take_photo(token, ct):
     copyfile(photoFile, newPath)
 
     return newDir
+
+def place_logo_on_photo(logo, inPhoto, outPhoto):
+
+    mimage = Image.open(inPhoto)
+    limage = Image.open(logo)
+
+    # resize logo
+    wsize = int(min(mimage.size[0], mimage.size[1]) * 0.25)
+    wpercent = (wsize / float(limage.size[0]))
+    hsize = int((float(limage.size[1]) * float(wpercent)))
+
+    simage = limage.resize((wsize, hsize))
+    mbox = mimage.getbbox()
+    sbox = simage.getbbox()
+
+    # right bottom corner
+    box = (mbox[2] - sbox[2], mbox[3] - sbox[3])
+    mimage.paste(simage, box, simage)
+    mimage.save(outPhoto)
 
 @app.route('/<path:path>')
 def catch_all(path):
