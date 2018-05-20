@@ -20,6 +20,17 @@ services:
       - camera-controller
       - countdown-service
   
+  photo-album:
+    build: './Photo-Album'
+    ports:
+      - "5011:5000"
+    volumes:
+      - "./photos:/photos"
+    networks:
+      - studio
+    depends_on:
+      - countdown-service
+
   countdown-service:
     build: './Countdown-Service'
     ports:
