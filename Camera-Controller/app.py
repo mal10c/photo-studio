@@ -1,13 +1,13 @@
 import logging
 import os
 import gphoto2 as gp
-from flask import Flask
+from flask import Flask, request, redirect
 from shutil import copyfile
 import logging
 
 app = Flask(__name__)
 
-def take_photo():
+def take_photo(token):
 
     log = ""
 
@@ -22,7 +22,7 @@ def take_photo():
         os.makedirs(photoDir)
     
     logging.basicConfig(
-        format='%(levelname)s: %(name)s: %(message)s', level=logging.WARNING)
+        format='%(levelname)s: %(name)s: %(message)s', level=logging.INFO)
     gp.check_result(gp.use_python_logging())
     camera = gp.check_result(gp.gp_camera_new())
     gp.check_result(gp.gp_camera_init(camera))
@@ -38,17 +38,30 @@ def take_photo():
     gp.check_result(gp.gp_camera_exit(camera))
 
     newPath = "/photos"
-    newPath = os.path.join(newPath, file_path.name)
+    fileName = token + "__" + file_path.name
+    newDir = os.path.join(newPath, token)
+    if not os.path.exists(newDir):
+        logging.info("Creating directory for photos at: " + newDir)
+        os.mkdir(newDir)
+    else:
+        logging.warning("Photo directory already exists: " + newDir)
 
+    newPath = os.path.join(newDir, fileName)
+
+    logging.info("New Path: " + newPath)
     copyfile(photoFile, newPath)
 
-    return photoFile, photoDir, log
+    return newDir
 
-@app.route('/')
-def hello():
-    logging.info("TAKING PICTURE!")
-    photoFile, photoDir, log = take_photo()
-    return '<b>Hello from the camera controller!\n{}\n\n{}'.format(photoDir, log)
+@app.route('/<path:path>')
+def catch_all(path):
+    if path == "takePhoto":
+        token = request.args.get("token")
+        logging.info("TAKING PICTURE!")
+        newPath = take_photo(token)
+        return '{}'.format(newPath)
+    
+    return "No token given"
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

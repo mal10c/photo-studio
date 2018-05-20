@@ -103,7 +103,7 @@ def catch_all(path):
             sleep(1)
 
         logging.info("Taking picture...")
-        contents = urllib2.urlopen("http://172.16.0.1:5002").read()
+        contents = urllib2.urlopen("http://172.16.0.1:5002/takePhoto?token=" + token).read()
 
         return result
 

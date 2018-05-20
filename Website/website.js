@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     iframe.src = url;
 
     cmd_startSession.addEventListener("click", function() {
-        token = firstName.value + ":" + lastName.value + ":"
+        token = firstName.value + "_" + lastName.value + "_"
         token += Math.floor(Math.random() * 20);
         control.src = "http://172.16.0.1:5010/session?state=active&token=" + token;
     });

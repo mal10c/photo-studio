@@ -41,14 +41,13 @@ services:
   camera-controller:
     build: './Camera-Controller'
     ports:
-     - "5002:5000"
-    volumes:
-     - .:/share
+      - "5002:5000"
     privileged: true
     volumes:
       - /dev/bus/usb:/dev/bus/usb
       - /run/udev:/run/udev:ro
       - ./photos:/photos
+      - .:/share
     hostname: 'cam'
     networks:
       - studio
