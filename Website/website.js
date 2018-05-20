@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     activeStuff = document.getElementById("active");
     inactiveStuff = document.getElementById("inactive");
     var url = "http://172.16.0.1:5010"
+    var photoURL = "";
     iframe = document.getElementById("sessionState")
     iframe.style.display = "none";
     control = document.getElementById("control");
@@ -10,8 +11,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
     firstName = document.getElementById("firstName");
     lastName = document.getElementById("lastName");
     countStatus = document.getElementById("countStatus");
+    albumFrame = document.getElementById("albumFrame");
+    albumFrame.style.display = "none";
+    album = document.getElementById("album");
     data = "";
     token = "";
+
+    albumFrame.addEventListener("load", function() {
+        iframe.contentWindow.postMessage('getPhotos', url);
+    });
 
     handleResponse = function(e) {
         if(e.origin == url) 
@@ -19,11 +27,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
             if (data != e.data)
             {
                 data = e.data.split("|");
+                console.log(data);
                 if (data[0] == "active")
                 {
                     if (data[2] == "Yes")
                     {
                         countStatus.innerHTML = data[3];
+                        if (data[4] != "")
+                        {
+                            album.innerHTML = data[4];
+                        }
                     }
                     activeStuff.style.display = "block";
                     inactiveStuff.style.display = "none";

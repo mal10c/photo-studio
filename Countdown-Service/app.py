@@ -13,13 +13,21 @@ countdownTime = 0
 token = ""
 photoCountdown = "No"
 ctTimeLeft = 0
+photoPath = ""
 
 @app.route('/')
 def hello():
 
     global sessionState
     global token
-    params = sessionState + "|" + token + "|" + photoCountdown + "|" + str(ctTimeLeft)
+    global photoPath
+    params = sessionState + "|" + token + "|" + photoCountdown + "|" + str(ctTimeLeft) + "|"
+    if photoPath != "":
+        fp = urllib2.urlopen("http://172.16.0.1:5011/album?folder=" + str(token))
+        photoURLs = fp.read()
+        photoURLs = photoURLs.decode("utf8")
+        fp.close()
+        params += photoURLs
     html = """
         <script language="javascript">
             respondToMessage = function(e) {
@@ -89,24 +97,25 @@ def catch_all(path):
         global sessionState
         global photoCountdown
         global ctTimeLeft
+        global photoPath
 
         countdownTime = int(countdownTime)
         ctTimeLeft = countdownTime
 
-        result = ""
+        contents = ""
 
         photoCountdown = "Yes"
         for ct in range(0, int(photoCtToTake)):
             for ctOffset in range(0, countdownTime + 1):
                 ctTimeLeft = countdownTime - ctOffset
-                result += "Now: " + str(ctTimeLeft) + ", "
                 logging.info("Countdown: " + str(ctTimeLeft))
                 sleep(1)
 
             logging.info("Taking picture...")
             contents = urllib2.urlopen("http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct)).read()
 
-        return result
+        photoPath = contents
+        return photoPath
 
     else:
         return "unknown"
