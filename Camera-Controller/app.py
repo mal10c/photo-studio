@@ -48,30 +48,47 @@ def take_photo(token, ct):
         logging.warning("Photo directory already exists: " + newDir)
 
     newPath = os.path.join(newDir, fileName)
+    fileNameWithLogo = token + "__" + str(ct) + "_LOGO_" + file_path.name
+    newPathWithLogo = os.path.join(newDir, fileNameWithLogo)
+    logging.info("In photo: " + newPath)
+    logging.info("Out photo: " + newPathWithLogo)
 
     logging.info("New Path: " + newPath)
     copyfile(photoFile, newPath)
+
+    place_logo_on_photo("/logo/logo-with-shadow.png", newPath, newPathWithLogo)
 
     return newDir
 
 def place_logo_on_photo(logo, inPhoto, outPhoto):
 
+    logging.info("Test 1")
     mimage = Image.open(inPhoto)
+    logging.info("Test 2")
     limage = Image.open(logo)
-
+    logging.info("Test 3")
     # resize logo
     wsize = int(min(mimage.size[0], mimage.size[1]) * 0.25)
+    logging.info("Test 4")
     wpercent = (wsize / float(limage.size[0]))
+    logging.info("Test 5")
     hsize = int((float(limage.size[1]) * float(wpercent)))
+    logging.info("Test 6")
 
     simage = limage.resize((wsize, hsize))
+    logging.info("Test 7")
     mbox = mimage.getbbox()
+    logging.info("Test 8")
     sbox = simage.getbbox()
+    logging.info("Test 9")
 
     # right bottom corner
     box = (mbox[2] - sbox[2], mbox[3] - sbox[3])
+    logging.info("Test 10")
     mimage.paste(simage, box, simage)
+    logging.info("Test 11")
     mimage.save(outPhoto)
+    logging.info("Test 12")
 
 @app.route('/<path:path>')
 def catch_all(path):

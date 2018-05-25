@@ -48,6 +48,7 @@ services:
       - /run/udev:/run/udev:ro
       - ./photos:/photos
       - .:/share
+      - ./logo:/logo
     hostname: 'cam'
     networks:
       - studio
