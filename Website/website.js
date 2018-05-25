@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     album = document.getElementById("album");
     data = "";
     token = "";
+    cmd_sendEmail = document.getElementById("cmd_sendEmail");
 
     albumFrame.addEventListener("load", function() {
         iframe.contentWindow.postMessage('getPhotos', url);
@@ -69,6 +70,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
         token = firstName.value + "_" + lastName.value + "_"
         token += Math.floor(Math.random() * 20);
         control.src = "http://172.16.0.1:5010/session?state=active&token=" + token;
+    });
+
+    cmd_sendEmail.addEventListener("click", function() {
+        alert("Iterate through email addresses, attach photos, make pretty with html stuff (if you have time), and INCLUDE FLAG THAT PHOTO WAS SENT... in case internet connection isnt available");
+        alert("Oh, and find a way to include external storage");
+        alert("Mount everything to wood or something");
     });
 
 });
