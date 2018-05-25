@@ -17,21 +17,33 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // Lists
     var photosToTakeCt = document.getElementById("photosToTakeCt");
     var countdownTime = document.getElementById("countdownTime");
+    var percent = document.getElementById("percent");
 
     photosToTakeCt.addEventListener("change", function() {
         photoCt = photosToTakeCt.value;
         ctDownTime = countdownTime.value;
-        console.log("Writing: " + photoCt + ", " + ctDownTime);
-        console.log("http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime);
-        control.src = "http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime;
+        percentAmt = percent.value;
+        console.log("Writing: " + photoCt + ", " + ctDownTime + ", " + percentAmt);
+        console.log("http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime + "&percent=" + percentAmt);
+        control.src = "http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime + "&percent=" + percentAmt;
     });
 
     countdownTime.addEventListener("change", function() {
         photoCt = photosToTakeCt.value;
         ctDownTime = countdownTime.value;
-        console.log("Writing: " + photoCt + ", " + ctDownTime);
-        console.log("http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime);
-        control.src = "http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime;
+        percentAmt = percent.value;
+        console.log("Writing: " + photoCt + ", " + ctDownTime + ", " + percentAmt);
+        console.log("http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime + "&percent=" + percentAmt);
+        control.src = "http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime + "&percent=" + percentAmt;
+    });
+
+    percent.addEventListener("change", function() {
+        photoCt = photosToTakeCt.value;
+        ctDownTime = countdownTime.value;
+        percentAmt = percent.value;
+        console.log("Writing: " + photoCt + ", " + ctDownTime + ", " + percentAmt);
+        console.log("http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime + "&percent=" + percentAmt);
+        control.src = "http://172.16.0.1:5010/adminInfo?photoCtToTake=" + photoCt + "&countdownTime=" + ctDownTime + "&percent=" + percentAmt;
     });
 
     // Button click events

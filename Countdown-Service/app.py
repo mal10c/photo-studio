@@ -14,6 +14,7 @@ token = ""
 photoCountdown = "No"
 ctTimeLeft = 0
 photoPath = ""
+percent = "0.4"
 
 @app.route('/')
 def hello():
@@ -28,7 +29,7 @@ def hello():
         photoURLs = photoURLs.decode("utf8")
         fp.close()
         params += photoURLs
-        
+
     html = """
         <script language="javascript">
             respondToMessage = function(e) {
@@ -74,14 +75,18 @@ def catch_all(path):
         
         global photoCtToTake
         global countdownTime
+        global percent
 
         p = request.args.get("photoCtToTake")
         c = request.args.get("countdownTime")
+        per = request.args.get("percent")
 
         if p != None:
             photoCtToTake = p
         if c != None:
             countdownTime = c
+        if per != None:
+            percent = per
 
         return str(photoCtToTake) + ", " + str(countdownTime)
 
@@ -100,6 +105,7 @@ def catch_all(path):
         global photoCountdown
         global ctTimeLeft
         global photoPath
+        global percent
 
         countdownTime = int(countdownTime)
         ctTimeLeft = countdownTime
@@ -114,7 +120,7 @@ def catch_all(path):
                 sleep(1)
 
             logging.info("Taking picture...")
-            contents = urllib2.urlopen("http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct)).read()
+            contents = urllib2.urlopen("http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct) + "&p=" + percent).read()
 
         logging.info("Received new photos from album!")
         photoPath = contents
