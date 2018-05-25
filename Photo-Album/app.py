@@ -20,7 +20,7 @@ def catch_all(path):
             for photo in os.listdir(photoPath):
                 if photo.endswith("jpg"):
                     entirePath = "http://172.16.0.1:5011{}/{}".format(photoPath, photo)
-                    result += "<img src=\"{}\" />".format(entirePath)
+                    result += "<img class=\"customerPhoto\" src=\"{}\" />".format(entirePath)
         else:
             result = "Directory not found"
     else:

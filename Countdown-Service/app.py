@@ -28,11 +28,13 @@ def hello():
         photoURLs = photoURLs.decode("utf8")
         fp.close()
         params += photoURLs
+        
     html = """
         <script language="javascript">
             respondToMessage = function(e) {
                 if((e.origin == 'http://172.16.0.1:5000') ||
-                   (e.origin == 'http://172.16.0.1:5001')) {
+                   (e.origin == 'http://172.16.0.1:5001')) 
+                {
                     if(e.data == 'sessionState')
                     {
                         e.source.postMessage('""" + params + """', e.origin);
@@ -114,6 +116,7 @@ def catch_all(path):
             logging.info("Taking picture...")
             contents = urllib2.urlopen("http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct)).read()
 
+        logging.info("Received new photos from album!")
         photoPath = contents
         return photoPath
 

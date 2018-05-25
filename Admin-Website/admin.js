@@ -39,7 +39,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         control.src = "http://172.16.0.1:5010/session?state=inactive";
     });
 
+    // Button that starts the countdown to take photo(s)
     cmd_takePhoto.addEventListener("click", function() {
+        console.log("Sending request to countdown-service");
         control.src = "http://172.16.0.1:5010/takePhoto";
     });
 
@@ -62,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 console.log("Token: " + params[1]);
                 if (params[2] == "Yes")
                 {
+                    console.log("Photos are ready to view!");
                     countStatus.innerHTML = params[3];
                 }
                 
@@ -81,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Register iframe load callback
     iframe.addEventListener("load", iframeLoaded, false);
+    console.log("URL Request: " + url);
     iframe.src = url;
 
 });
