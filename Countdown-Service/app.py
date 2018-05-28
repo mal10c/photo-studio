@@ -120,7 +120,9 @@ def catch_all(path):
                 sleep(1)
 
             logging.info("Taking picture...")
-            contents = urllib2.urlopen("http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct) + "&p=" + percent).read()
+            takePhotoUrl = "http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct) + "&p=" + percent
+            logging.info("URL: " + takePhotoUrl)
+            contents = urllib2.urlopen(takePhotoUrl).read()
 
         logging.info("Received new photos from album!")
         photoPath = contents

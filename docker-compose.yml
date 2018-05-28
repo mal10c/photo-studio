@@ -5,7 +5,15 @@ services:
     ports:
       - "5000:5000"
     volumes:
-     - ./Admin-Website:/share
+      - ./Admin-Website:/share
+    networks:
+      - studio
+    environment:
+      - "PYTHONUNBUFFERED=1"
+    depends_on:
+      - camera-controller
+      - countdown-service
+      - photo-album
   
   website:
     build: './Website'
@@ -19,6 +27,9 @@ services:
     depends_on:
       - camera-controller
       - countdown-service
+      - photo-album
+    environment:
+      - "PYTHONUNBUFFERED=1"
   
   photo-album:
     build: './Photo-Album'
@@ -30,6 +41,8 @@ services:
       - studio
     depends_on:
       - countdown-service
+    environment:
+      - "PYTHONUNBUFFERED=1"
 
   countdown-service:
     build: './Countdown-Service'
@@ -37,6 +50,8 @@ services:
       - "5010:5000"
     networks:
       - studio
+    environment:
+      - "PYTHONUNBUFFERED=1"
   
   camera-controller:
     build: './Camera-Controller'
@@ -47,11 +62,13 @@ services:
       - /dev/bus/usb:/dev/bus/usb
       - /run/udev:/run/udev:ro
       - ./photos:/photos
-      - .:/share
+      - ./Camera-Controller:/share
       - ./logo:/logo
     hostname: 'cam'
     networks:
       - studio
+    environment:
+      - "PYTHONUNBUFFERED=1"
 
 networks:
   studio:
