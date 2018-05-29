@@ -81,9 +81,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
     cmd_sendEmail.addEventListener("click", function() {
-        alert("Iterate through email addresses, attach photos, make pretty with html stuff (if you have time), and INCLUDE FLAG THAT PHOTO WAS SENT... in case internet connection isnt available");
-        alert("Oh, and find a way to include external storage");
-        alert("Mount everything to wood or something");
+        
+        __email = document.getElementById("__email")
+        __fname = document.getElementById("__fname")
+        __lname = document.getElementById("__lname")
+        emailUrl = "http://172.16.0.1:5012/sendEmail?email=" + __email.innerHTML + "&fname=" + __fname.innerHTML + "&lname=" + __lname.innerHTML + "&images=["
+        
+        imgs = album.getElementsByTagName("img");
+        for (var i = 0; i < imgs.length; i++)
+        {
+            emailUrl += imgs[i].src
+            if (i + 1 < imgs.length)
+            {
+                emailUrl += ",";
+            }
+        }
+
+        emailUrl += "]"
+
+        alert(emailUrl)
+
     });
 
 });
