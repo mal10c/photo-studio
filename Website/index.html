@@ -4,11 +4,135 @@
         <title>Photo-Studio: Photo Session</title>
 
         <style type="text/css">
+            body {
+                background-color: #EEF7FC;
+            }
+
+            label {
+                display: inline-block;
+                font-size: 18px;
+                margin-top: 30px;
+                font-weight: bold;
+            }
+
+            input {
+                display: block;
+                padding: 10px;
+                font-size: 18px;
+                margin-top: 10px;
+                margin-left: 40px;
+                margin-bottom: 5px;
+                width: calc(100% - 40px - 24px);
+                background-color: white;
+            }
+
+            #footer2 {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #E5FFE0;
+                border-top: 2px solid #D7DAD6;
+                text-align: right;
+            }
+
+            #cmd_startSession {
+                display: block;
+                background-color: #D4EACF;
+                border: 2px solid #609055;
+                color: #0B1609;
+                font-weight: bold;
+                padding: 10px;
+                margin: 20px;
+                float: right;
+            }
+
+            #cmd_startSession:hover {
+                background-color: white;
+            }
+
+            #firstName {
+                
+            }
+
+            #lastName {
+                
+            }
+
+            #email {
+                
+            }
+
+            #inactive {
+                position: relative;
+                width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 8px;
+                box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+                padding: 20px;
+                background-color: #FBFDFE;
+            }
+
             .customerPhoto {
-                width: 400px;
+                width: 300px;
                 margin: 4px;
                 float: left;
+                border-radius: 8px;
+                box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
             }
+
+            #__fname {
+                display: none;
+            }
+
+            #__lname {
+                display: none;
+            }
+
+            #__email {
+                display: none;
+            }
+
+            #cmd_sendEmail {
+                display: block;
+                background-color: #D4EACF;
+                border: 2px solid #609055;
+                color: #0B1609;
+                font-weight: bold;
+                padding: 10px;
+                margin: 20px;
+                float: right;
+            }
+
+            #cmd_sendEmail:hover {
+                background-color: white;
+            }
+
+            #album {
+                display: block;
+            }
+
+            #footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #E5FFE0;
+                border-top: 2px solid #D7DAD6;
+                text-align: right;
+            }
+            
+            #__fnameGreeting1 {
+                font-weight: bold;
+                font-size: 18px;
+            }
+
+            #__fnameGreeting2 {
+                font-weight: bold;
+                font-size: 18px;
+            }
+
         </style>
 
         <script src="website.js"></script>
@@ -30,17 +154,21 @@
             <label for="lastName">Last Name:</label>
             <input type="text" id="lastName"/>
 
-            <label for="email">E-mail Addresses:</label>
+            <label for="email">E-mail Address:</label>
             <input type="text" id="email"/>
 
-            <button type="button" id="cmd_startSession">Start Photo Session</button>
+            <div id="footer2">
+                <button type="button" id="cmd_startSession">Start Photo Session</button>
+            </div>
         </div>
 
         <div id="active">
             <div id="countStatus"></div>
             Session is active!
             <div id="album"></div>
-            <button type="button" id="cmd_sendEmail">Send Photos</button>
+            <div id="footer">
+                <button type="button" id="cmd_sendEmail">Send Photos</button>
+            </div>
         </div>
 
     </body>

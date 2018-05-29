@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         setTimeout(function() {
             iframe.src = url;
-        }, 500);
+        }, 800);
     } 
     window.addEventListener('message', handleResponse, false);
     

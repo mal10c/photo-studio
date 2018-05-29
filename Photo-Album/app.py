@@ -24,9 +24,11 @@ def catch_all(path):
             if os.path.isfile(dataFileName):
                 with open(dataFileName) as f:
                     data = json.load(f)
-                    result += "<div id=\"__email\">" + data["email"] + "</div>"
+                    result += "<div id=\"__fnameGreeting1\">Thank you " + data["fname"] + "</div>"
+                    result += "<div id=\"__fnameGreeting2\">Your photos will be emailed to: " + data["email"] + "</div>"
                     result += "<div id=\"__fname\">" + data["fname"] + "</div>"
                     result += "<div id=\"__lname\">" + data["lname"] + "</div>"
+                    result += "<div id=\"__email\">" + data["email"] + "</div>"
 
             for photo in os.listdir(photoPath):
                 if photo.endswith("jpg"):
