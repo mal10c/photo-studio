@@ -97,6 +97,11 @@ def catch_all(path):
             "path": newPath
         }
 
+        try:
+            to_unicode = unicode
+        except NameError:
+            to_unicode = str
+
         jsonFile = os.path.join(newPath, "data.json")
         with io.open(jsonFile, 'w', encoding='utf8') as dataFile:
             str_ = json.dumps(data,
