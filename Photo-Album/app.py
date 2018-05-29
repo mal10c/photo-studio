@@ -1,6 +1,8 @@
 import time
 import os
 from flask import Flask, request, redirect, send_from_directory
+import os.path
+import json
 
 app = Flask(__name__)
 
@@ -17,6 +19,15 @@ def catch_all(path):
         folder = request.args.get("folder")
         photoPath = "/photos/" + folder
         if os.path.isdir(photoPath):
+
+            dataFileName = os.path.join(photoPath, "data.json")
+            if os.path.isfile(dataFileName):
+                with open(dataFileName) as f:
+                    data = json.load(f)
+                    result += "<div id=\"email\">" + data["email"] + "</div>"
+                    result += "<div id=\"fname\">" + data["fname"] + "</div>"
+                    result += "<div id=\"lname\">" + data["lname"] + "</div>"
+
             for photo in os.listdir(photoPath):
                 if photo.endswith("jpg"):
                     if "_LOGO_" in photo:
@@ -26,7 +37,7 @@ def catch_all(path):
             result = "Directory not found"
     else:
         return "Invalid"
-    
+
     return result
 
 if __name__ == "__main__":
