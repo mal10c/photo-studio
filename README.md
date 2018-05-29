@@ -4,6 +4,10 @@ To launch, install Docker and run the following command:
 
 	docker-compose up
 
+To compile and launch, run:
+
+	docker-compose up --build
+
 If you need to remove any and all containers that were created, run clean.sh.
 
 # To Do List
@@ -41,7 +45,7 @@ If you need to remove any and all containers that were created, run clean.sh.
 
  * ~~Port email code~~
  * ~~Add HTML to email~~
- * Include multiple attachments in case multiple photos were taken
+ * ~~Include multiple attachments in case multiple photos were taken~~
 
 ## All Categories
 
