@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         __email = document.getElementById("__email")
         __fname = document.getElementById("__fname")
         __lname = document.getElementById("__lname")
-        emailUrl = "http://172.16.0.1:5012/sendEmail?email=" + __email.innerHTML + "&fname=" + __fname.innerHTML + "&lname=" + __lname.innerHTML + "&images=["
+        emailUrl = "http://172.16.0.1:5012/sendEmail?email=" + __email.innerHTML + "&fname=" + __fname.innerHTML + "&lname=" + __lname.innerHTML + "&images="
         
         imgs = album.getElementsByTagName("img");
         for (var i = 0; i < imgs.length; i++)
@@ -97,9 +97,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
         }
 
-        emailUrl += "]"
-
-        alert(emailUrl)
+        console.log(emailUrl)
+        control.src = emailUrl;
 
     });
 
