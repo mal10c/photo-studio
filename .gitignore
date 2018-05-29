@@ -103,3 +103,5 @@ Camera-Controller/photos/capt0000.jpg
 my-logfile.txt
 photos/*.jpg
 logo/*.png
+Email-Service/smtp-email-info.json
+Email-Service/message.html

@@ -5,6 +5,8 @@ from flask import Flask, request, redirect
 from shutil import copyfile
 import logging
 from PIL import Image
+import json
+import io
 
 app = Flask(__name__)
 
@@ -81,8 +83,29 @@ def catch_all(path):
         token = request.args.get("token")
         ct = request.args.get("ct")
         p = request.args.get("p")
+        email = request.args.get("email")
+        fname = request.args.get("fname")
+        lname = request.args.get("lname")
         logging.info("TAKING PICTURE!")
         newPath = take_photo(token, ct, float(p))
+
+        # Create json file in directory containing images
+        data = {
+            "email": email,
+            "fname": fname,
+            "lname": lname,
+            "path": newPath
+        }
+
+        jsonFile = os.path.join(newPath, "data.json")
+        with io.open(jsonFile, 'w', encoding='utf8') as dataFile:
+            str_ = json.dumps(data,
+                indent=4,
+                sort_keys=True,
+                separators=(',', ': '),
+                ensure_ascii=False)
+            dataFile.write(to_unicode(str_))
+
         return '{}'.format(newPath)
     
     return "No token given"

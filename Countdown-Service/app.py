@@ -15,6 +15,9 @@ photoCountdown = "No"
 ctTimeLeft = 0
 photoPath = ""
 percent = "0.4"
+email = ""
+fname = ""
+lname = ""
 
 @app.route('/')
 def hello():
@@ -56,6 +59,9 @@ def catch_all(path):
         global sessionState
         state = request.args.get("state")
         t = request.args.get("token")
+        e = request.args.get("email")
+        fn = request.args.get("fname")
+        ln = request.args.get("lname")
         if state == None:
             return sessionState
         elif state == "active":
@@ -63,6 +69,15 @@ def catch_all(path):
             if t != None:
                 global token
                 token = t
+            if e != None:
+                global email
+                email = e
+            if fn != None:
+                global fname
+                fname = fn
+            if ln != None:
+                global lname
+                lname = ln
             return "ACTIVE"
         elif state == "inactive":
             sessionState = "inactive"
@@ -106,6 +121,9 @@ def catch_all(path):
         global ctTimeLeft
         global photoPath
         global percent
+        global email
+        global fname
+        global lname
 
         countdownTime = int(countdownTime)
         ctTimeLeft = countdownTime
@@ -120,7 +138,7 @@ def catch_all(path):
                 sleep(1)
 
             logging.info("Taking picture...")
-            takePhotoUrl = "http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct) + "&p=" + percent
+            takePhotoUrl = "http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct) + "&p=" + percent + "&email=" + email + "&fname=" + fname + "&lname=" + lname
             logging.info("URL: " + takePhotoUrl)
             contents = urllib2.urlopen(takePhotoUrl).read()
 

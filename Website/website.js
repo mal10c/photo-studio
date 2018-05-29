@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     control.style.display = "none";
     firstName = document.getElementById("firstName");
     lastName = document.getElementById("lastName");
+    email = document.getElementById("email");
     countStatus = document.getElementById("countStatus");
     albumFrame = document.getElementById("albumFrame");
     albumFrame.style.display = "none";
@@ -68,8 +69,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     cmd_startSession.addEventListener("click", function() {
         token = firstName.value + "_" + lastName.value + "_"
-        token += Math.floor(Math.random() * 20);
-        control.src = "http://172.16.0.1:5010/session?state=active&token=" + token;
+        var d = new Date();
+        dtStamp = d.getFullYear() + ""
+            + d.getMonth() + ""
+            + d.getDay() + ""
+            + d.getHours() + ""
+            + d.getMinutes()
+
+        token += dtStamp;
+        control.src = "http://172.16.0.1:5010/session?state=active&token=" + token + "&email=" + encodeURI(email.value) + "&fname=" + encodeURI(firstName.value) + "&lname=" + encodeURI(lastName.value);
     });
 
     cmd_sendEmail.addEventListener("click", function() {

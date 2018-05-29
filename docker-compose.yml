@@ -69,6 +69,18 @@ services:
       - studio
     environment:
       - "PYTHONUNBUFFERED=1"
+  
+  email-service:
+    build: './Email-Service'
+    ports:
+      - "5012:5000"
+    volumes:
+      - ./Email-Service:/share
+      - ./photos:/photos
+    networks:
+      - studio
+    environment:
+      - "PYTHONUNBUFFERED=1"
 
 networks:
   studio:
