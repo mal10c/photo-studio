@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     data = "";
     token = "";
     cmd_sendEmail = document.getElementById("cmd_sendEmail");
+    status = document.getElementById("status");
 
     albumFrame.addEventListener("load", function() {
         iframe.contentWindow.postMessage('getPhotos', url);
@@ -32,14 +33,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 console.log(data);
                 if (data[0] == "active")
                 {
+                    // Determine if the countdown timer is live - meaning the camera
+                    // is about to take a photo
                     if (data[2] == "Yes")
                     {
+                        countStatus.style.display = "block";
+
+                        // Get the number of seconds remaining before the camera will
+                        // take the photo
                         countStatus.innerHTML = data[3];
-                        if (data[4] != "")
-                        {
-                            album.innerHTML = data[4];
-                        }
                     }
+                    else
+                    {
+                        countStatus.style.display = "none";
+                    }
+
+                    if (data[4] != "")
+                    {
+                        album.innerHTML = data[4];
+                    }
+
                     activeStuff.style.display = "block";
                     inactiveStuff.style.display = "none";
                 }
@@ -53,13 +66,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         setTimeout(function() {
             iframe.src = url;
-        }, 800);
+        }, 500);
     } 
     window.addEventListener('message', handleResponse, false);
     
     // Callback when iframe contents are loaded
     iframeLoaded = function() {
-        console.log("Posting request");
         iframe.contentWindow.postMessage('sessionState', url);
     };
 

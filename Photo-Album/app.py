@@ -6,6 +6,18 @@ import json
 
 app = Flask(__name__)
 
+#@app.after_request
+#def add_header(r):
+#    """
+#    Add headers to both force latest IE rendering engine or Chrome Frame,
+#    and also to cache the rendered page for 10 minutes.
+#    """
+#    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+#    r.headers["Pragma"] = "no-cache"
+#    r.headers["Expires"] = "0"
+#    r.headers['Cache-Control'] = 'public, max-age=0'
+#    return r
+
 @app.route('/photos/<path:path>')
 def send_photos(path):
     return send_from_directory('/photos', path)
@@ -25,7 +37,8 @@ def catch_all(path):
                 with open(dataFileName) as f:
                     data = json.load(f)
                     result += "<div id=\"__fnameGreeting1\">Thank you " + data["fname"] + "</div>"
-                    result += "<div id=\"__fnameGreeting2\">Your photos will be emailed to: " + data["email"] + "</div>"
+                    result += "<div id=\"__fnameGreeting2\">Your photos are all set to go to: " + data["email"] + "</div>"
+                    #result += "<div id=\"__fnameGreeting3\">Press the button below when you're ready to send the photos.</div>"
                     result += "<div id=\"__fname\">" + data["fname"] + "</div>"
                     result += "<div id=\"__lname\">" + data["lname"] + "</div>"
                     result += "<div id=\"__email\">" + data["email"] + "</div>"

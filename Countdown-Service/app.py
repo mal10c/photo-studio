@@ -18,6 +18,7 @@ percent = "0.4"
 email = ""
 fname = ""
 lname = ""
+masterCt = 0
 
 @app.route('/')
 def hello():
@@ -124,6 +125,7 @@ def catch_all(path):
         global email
         global fname
         global lname
+        global masterCt
 
         countdownTime = int(countdownTime)
         ctTimeLeft = countdownTime
@@ -138,12 +140,14 @@ def catch_all(path):
                 sleep(1)
 
             logging.info("Taking picture...")
-            takePhotoUrl = "http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct) + "&p=" + percent + "&email=" + email + "&fname=" + fname + "&lname=" + lname
+            takePhotoUrl = "http://172.16.0.1:5002/takePhoto?token=" + token + "&ct=" + str(ct) + "-" + str(masterCt) + "&p=" + percent + "&email=" + email + "&fname=" + fname + "&lname=" + lname
+            masterCt += 1
             logging.info("URL: " + takePhotoUrl)
             contents = urllib2.urlopen(takePhotoUrl).read()
 
         logging.info("Received new photos from album!")
         photoPath = contents
+        photoCountdown = "No"
         return photoPath
 
     else:
